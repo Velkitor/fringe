@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+def print_help
+  puts 'Help mah!'
+end
+
+def create_new(name)
+  if name && name.match(/\w/)
+    FileUtils.copy_entry(File.dirname(__FILE__) + '/scaffold' , Dir.pwd + '/' + name)
+    puts "Fringe App: #{name} Created."
+    puts "Please run `bundle` in the app directory."
+  else
+    puts 'Please provide an app name.'
+  end
+end
+
+case (ARGV[0] || '').downcase
+when 'new'
+  create_new(ARGV[1])
+else
+  print_help
+end
