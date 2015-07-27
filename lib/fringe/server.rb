@@ -45,12 +45,17 @@ module Fringe
           require("#{@@app_dir}/config/initializers/#{file_name}")
         end
       end
+      model_files = []
       Dir["#{@@app_dir}/app/models/*.rb"].each do |file|
         match = file.match(/\/([^\/.]+)\.rb$/)
         if match
           file_name = match[1]
+          model_files << file_name
           autoload(file_name.camelize.to_sym, file)
         end
+      end
+      model_files.each do |file_name|
+        require("#{@@app_dir}/app/models/#{file_name}")
       end
       Dir["#{@@app_dir}/app/controllers/*.rb"].each do |file|
         match = file.match(/\/([^\/.]+)\.rb$/)
