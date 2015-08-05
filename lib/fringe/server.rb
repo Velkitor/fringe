@@ -57,6 +57,7 @@ module Fringe
       model_files.each do |file_name|
         require("#{@@app_dir}/app/models/#{file_name}")
       end
+      require("#{@@app_dir}/app/controllers/application_controller")
       controller_files = []
       Dir["#{@@app_dir}/app/controllers/*.rb"].each do |file|
         match = file.match(/\/([^\/.]+)\.rb$/)
